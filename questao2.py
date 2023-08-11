@@ -1,6 +1,6 @@
 import unittest
 
-
+#não veio com enunciado
 def verbing(s):
     #SEU CODIGO AQUI
     pass
@@ -11,8 +11,12 @@ def verbing(s):
 # substituir todo o trecho "not ... bad" por 'good'
 # Retorne a string resultante.
 def not_bad(s):
-    #SEU CODIGO AQUI
-    pass
+  not_index = s.find('not')
+  bad_index = s.find('bad')
+  if not_index < bad_index:
+    switch = s[not_index : (bad_index + 3)]
+    return s.replace(switch, "good")
+  return s
 
 # Considere dividir uma string em duas metades.
 # Se o comprimento for par, a parte da frete (front) e a parte de trás (back) são do mesmo tamanho.
@@ -21,8 +25,22 @@ def not_bad(s):
 # Dado 2 strings, 'a' e 'b', retornar um string na forma
 # a front + b front + a back + b back
 def front_back(a, b):
-    #SEU CODIGO AQUI
-    pass
+  alen = len(a)
+  blen = len(b)
+  if alen % 2 == 1:
+    afront = a[:int((alen + 1) / 2)]
+    aback = a[int((alen + 1) / 2):]
+  else:
+    afront = a[:int(alen / 2)]
+    aback = a[int(alen / 2):]
+
+  if blen % 2 == 1:
+    bfront = b[:int((blen + 1) / 2)]
+    bback = b[int((blen + 1) / 2):]
+  else:
+    bfront = b[:int(blen / 2)]
+    bback = b[int(blen / 2):]
+  return afront + bfront + aback + bback
 
 class MyTest(unittest.TestCase):
 
