@@ -4,7 +4,11 @@ import unittest
 # se cada palavra for maior ou igual a dois e
 # se o primeiro caracter coincidir com o último
 def match_ends(words):
-  pass
+  count = 0
+  for i in words :
+    if len(i) >= 2 and i[0] == i[-1]:
+      count += 1
+  return count
 
 # Dado uma lista de strings, retornar uma lista de string ordenadas,
 # exceto todo grupo de strings que comece com "x" virá primeiro.
@@ -12,7 +16,11 @@ def match_ends(words):
 # Dica: isto pode ser feito com 2 listas ordenando cada uma delas e
 # depois combinado-as. Veja os testes para maiores detalhes.
 def front_x(words):
-  pass
+  xonly = [x for x in words if x[0] == 'x']
+  xnever = [x for x in words if x[0] != "x"]
+  xonly.sort()
+  xnever.sort()
+  return xonly + xnever
 
 # Dado uma lista de tuplas não vazias, retornar uma lista ordenada
 # pelo último elemento de cada tupla.
@@ -21,10 +29,12 @@ def front_x(words):
 # o último elemento, ela deve ser passada no segundo parâmetro
 # da função sorted()
 def sort_last(tuples):
-  pass
+  sorted = tuples
+  sorted.sort(key=last)
+  return sorted
 
 def last(a):
-  pass
+  return a[-1]
 
 class MyTest(unittest.TestCase):
   def test_match_ends(self):

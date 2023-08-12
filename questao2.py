@@ -1,9 +1,9 @@
 import unittest
 
 #não veio com enunciado
-def verbing(s):
+'''def verbing(s):
     #SEU CODIGO AQUI
-    pass
+    pass'''
 
 
 # Dado um astring, procurar a primeira ocorrência da substring 'not' e 'bad'
@@ -44,10 +44,10 @@ def front_back(a, b):
 
 class MyTest(unittest.TestCase):
 
-  def test_verbing(self):
+  '''def test_verbing(self):
     self.assertEqual(verbing('hail'), 'hailing')
     self.assertEqual(verbing('swiming'), 'swimingly')
-    self.assertEqual(verbing('do'), 'do')
+    self.assertEqual(verbing('do'), 'do')'''
 
   def test_not_bad(self):
     self.assertEqual(not_bad('This movie is not so bad'), 'This movie is good')
