@@ -5,6 +5,7 @@ def dormir(dia_semana, feriado):
     você pode ficar dormindo quando é feriado ou não é dia semana
     retorne True ou False conforme você vá dormir ou não
     """
+    return dia_semana == False or feriado
 
 def alunos_problema(a_sorri, b_sorri):
     """
@@ -13,6 +14,7 @@ def alunos_problema(a_sorri, b_sorri):
     temos problemas quando ambos estão sorrindo ou ambos não estão sorrindo
     retorne True quando houver problemas
     """
+    return a_sorri and b_sorri or not a_sorri and not b_sorri
 
 def soma_dobro(a, b):
     """
@@ -21,6 +23,10 @@ def soma_dobro(a, b):
     soma_dobro(1, 2) -> 3
     soma_dobro(2, 2) -> 8
     """
+    if a == b:
+        return (a + b) * 2
+    else:
+      return a + b
 
 def diff21(n):
     """
@@ -30,6 +36,10 @@ def diff21(n):
     diff21(25) -> 8
     dica: abs(x) retorna o valor absoluto de x
     """
+    if n > 21:
+        return (n - 21) * 2
+    else:
+        return 21 - n
 
 def papagaio(falando, hora):
     """
@@ -37,12 +47,14 @@ def papagaio(falando, hora):
     hora é um parâmetro entre 0 e 23
     temos problemas se o papagaio estiver falando antes da 7 ou depois das 20
     """
+    return falando and (hora < 7 or hora > 20)
 
 def dez(a, b):
     """
     dados dois inteiros a e b
     retorna True se um dos dois é 10 ou a soma é 10
     """
+    return a == 10 or b == 10 or a + b == 10
 
 def dista10(n):
     """
@@ -53,6 +65,7 @@ def dista10(n):
     dista10(90) -> True
     dista10(89) -> False
     """
+    return abs(100 - n) <= 10 or abs(200 - n) <= 10
 
 def apaga(s, n):
     """
@@ -61,6 +74,9 @@ def apaga(s, n):
     apaga('kitten', 1) -> 'ktten'
     apaga('kitten', 4) -> 'kittn'
     """
+    s = list(s)
+    s.pop(n)
+    return "".join(s)
 
 def troca(s):
     """
@@ -71,6 +87,13 @@ def troca(s):
     troca('a') -> 'a'
     troca('ab') -> 'ba'
     """
+    if len(s) < 2:
+        return s
+    else:
+        s = list(s)
+        s[0], s[-1] = s[-1], s[0]
+        return "".join(s)
+
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
@@ -80,12 +103,11 @@ def test(obtido, esperado):
     global acertos, total
     total += 1
     if obtido != esperado:
-        prefixo = ' Falhou.'
+        prefixo = '\033[31m%s' % ('Falhou')
     else:
-        prefixo = ' Passou.'
+        prefixo = '\033[32m%s' % ('Passou')
         acertos += 1
-    print ('%s Esperado: %s \tObtido: %s' % (prefixo,repr(esperado), 
-        repr(obtido)))
+    print('%s Esperado: %s \tObtido: %s\033[1;m' % (prefixo, repr(esperado), repr(obtido)))
 
 def main():
   print ('Oba! Hoje vou ficar dormindo!')
