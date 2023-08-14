@@ -13,6 +13,14 @@ def comprar_frutas(morango=0, uva=0):
     quantidade (em Kg) de uvas adquiridas e escreva o valor a ser 
     pago pelo cliente.
     '''
+    morango_preco = (morango/10) * 22 if morango > 5 else (morango/10) * 25
+    uva_preco = (uva/10) * 15 if uva > 5 else (uva/10) * 18
+    total = morango_preco + uva_preco
+    
+    if total > 25 or uva + morango > 8:
+        total = total - (total/10)
+
+    return total
 
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
