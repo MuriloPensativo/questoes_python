@@ -36,8 +36,7 @@ def test(obtido, esperado):
     else:
         prefixo = '\033[32m%s' % ('Passou')
         acertos += 1
-    print('%s Esperado: %s \tObtido: %s\033[1;m' % (prefixo, repr(esperado),
-                                                    repr(obtido)))
+    print('%s Esperado: %s \tObtido: %s\033[1;m' % (prefixo, repr(esperado), repr(obtido)))
 
 
 def main():

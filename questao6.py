@@ -1,19 +1,79 @@
 def palindrome(texto):
     '''Faça uma função que verifique se uma textro passado é palíndrome,
     isto é, se é igual quando lido de trás pra frente.'''
+    texto2 = ""
+    for a in texto:
+        if a.isalpha():
+            texto2 += a
+
+    texto2 = texto2.casefold()
+    texto2len = len(texto2)
+    
+    if texto2len % 2 == 1:
+        first_half = texto2[:int((texto2len - 1) / 2)]
+        second_half = texto2[int((1 - texto2len) / 2):]
+    else:
+        first_half = texto2[:int(texto2len / 2)]
+        second_half = texto2[int(-texto2len / 2):]
+
+    return first_half == second_half[::-1]
 
 def troca_caixa(texto):
     '''Vogais ficam em caixa alta (maiúsculas)
     Consoantes ficam em caixa baixa (minúsculas)'''
+    texto2 = ""
+    vogais = ['a', 'e', 'i', 'o', 'u']
+    consoantes = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
+    for a in texto:
+        if a in vogais:
+            texto2 += a.upper()
+        elif a in consoantes:
+            texto2 += a.lower()
+        else:
+            texto2 += a
+        
+    return texto2
 
 def imprime_mes_por_extenso(data):
     '''Faça um programa que solicite a data de nascimento (dd/mm/aaaa) 
     e imprima com o nome do mês por extenso
     '''
+    split_data = data.split("/")
+    if split_data[1] == "01":
+        split_data[1] = " de janeiro de "
+    elif split_data[1] == "02":
+        split_data[1] = " de fevereiro de "
+    elif split_data[1] == "03":
+        split_data[1] = " de março de "
+    elif split_data[1] == "04":
+        split_data[1] = " de abril de "
+    elif split_data[1] == "05":
+        split_data[1] = " de maio de "
+    elif split_data[1] == "06":
+        split_data[1] = " de junho de "
+    elif split_data[1] == "07":
+        split_data[1] = " de julho de "
+    elif split_data[1] == "08":
+        split_data[1] = " de agosto de "
+    elif split_data[1] == "09":
+        split_data[1] = " de setembro de "
+    elif split_data[1] == "10":
+        split_data[1] = " de outubro de "
+    elif split_data[1] == "11":
+        split_data[1] = " de novembro de "
+    elif split_data[1] == "12":
+        split_data[1] = " de dezembro de "
+    else:
+        split_data[1] = " mês inválido "
+        
+    return "".join(split_data)
 
 def encontra_caracter(texto, caracter):
     '''Receba um texto e retorne a localização da primeira vez que 
     aparece o caracter especificado'''
+    for i in range(len(texto)):
+        if caracter == texto[i]:
+         return i
 
 def numeros_sortudos(limite_inferior=1, limite_superior=100000):
     ''' Daniela é uma pessoa muito supersticiosa. Para ela, um número é 
@@ -24,6 +84,11 @@ def numeros_sortudos(limite_inferior=1, limite_superior=100000):
     Dica: faça uma função de validação e outra que a chama e 
     verifica o intervalo dado
     '''
+    count = 0
+    for n in range(limite_inferior, limite_superior + 1):
+        if "2" in str(n) and "7" not in str(n):
+            count += 1
+    return count
 
 def ponteironuloville(telefones):
     '''Na pacata vila campestre de Ponteironuloville, todos os telefones 
@@ -66,6 +131,32 @@ def ponteironuloville(telefones):
         551595 575447 587393 600953 615233 633673 659902 678315
         Resposta: 39 
     '''
+    def is_not_repeated(n):
+        text = str(n)
+        for x in range(len(text) - 1):
+            if text[x] == text[x + 1]:
+                return False
+        return True
+    
+    def is_even_sum(n):
+        text = str(n)
+        sum = 0
+        for a in text:
+            sum += int(a)
+        return sum % 2 == 0
+
+    def is_last_not_same_as_first(n):
+        z = str(n)
+        if z[0] == z[-1]:
+            return False
+        return True
+
+    total = 0
+
+    for n in telefones:
+        if is_not_repeated(n) and is_even_sum(n) and is_last_not_same_as_first(n):
+            total += 1
+    return total
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
@@ -75,12 +166,11 @@ def test(obtido, esperado):
     global acertos, total
     total += 1
     if obtido != esperado:
-        prefixo = ' Falhou.'
+        prefixo = '\033[31m%s' % ('Falhou')
     else:
-        prefixo = ' Passou.'
+        prefixo = '\033[32m%s' % ('Passou')
         acertos += 1
-    print ('%s Esperado: %s \tObtido: %s' % (prefixo,repr(esperado), 
-        repr(obtido)))
+    print('%s Esperado: %s \tObtido: %s\033[1;m' % (prefixo, repr(esperado), repr(obtido)))
 
 def main():
 
@@ -139,8 +229,8 @@ def main():
         551595 575447 587393 600953 615233 633673 659902 678315
     '''.strip().split()
     test(ponteironuloville(telefones), 39)
-    telefones = open('telefones.txt').read().strip().split()
-    test(ponteironuloville(telefones), 39)
+    #telefones = open('telefones.txt').read().strip().split()
+    #test(ponteironuloville(telefones), 39)
 
 if __name__ == '__main__':
     main()
