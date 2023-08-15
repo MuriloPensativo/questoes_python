@@ -2,24 +2,60 @@ def media_anual(temperaturas):
     '''Receba uma lista com as temperaturas médias de cada mês
     e devolva uma lista com os números correspondentes aos meses que 
     possuem temperatura superior á média anual.'''
+    media = sum(temperaturas) / len(temperaturas)
+    meses = []
+    for m in range(len(temperaturas)):
+        if temperaturas[m] > media:
+         meses.append(m)
+    return meses
 
 def maiores_13(idades,alturas):
     '''Esta função recebe as idades e alturas de diversas pessoas, em duas
     listas separadas e de igual comprimento.
     Calcule a media das alturas e retorne as alturas daqueles que possuem 
     'idades' maior que 13 e altura inferior a media da turma'''
+    media = sum(alturas) / len(alturas)
+    lista = []
+    for i in range(len(idades)):
+        if idades[i] > 13 and alturas[i] < media:
+         lista.append(alturas[i])
+    return lista
 
 def media_saltos_lista(saltos):
     '''Receba uma lista com os saltos de um atleta e calcule a média dos 
     seus saltos, sabendo que o melhor e o pior saltos são desconsiderados.'''
+    saltos.remove(max(saltos))
+    saltos.remove(min(saltos))
+    return sum(saltos) / len(saltos)
 
 def lista_de_primos(inicio,fim):
     '''Retorne uma lista de primos entre os valores informados, incluindo
     os limites'''
+    lista = []
+    for x in range(inicio, (fim + 1)):
+        for y in range(2, (x + 1)):
+            if x == 2:
+                lista.append(2)
+                break
+            elif x == y:
+                lista.append(x)
+            elif x % y == 0:
+                break
+    return lista
 
 def Fibonacci(n):
     ''' Retorne uma lista com os n primeiros valores da série de Fibonacci.
     Fibonacci = 1,1,2,3,5,8,13,...'''
+    novo = 0
+    atual = 1
+    antes = 0
+    lista = []
+    for f in range(n):
+        novo = antes + atual
+        lista.append(atual)
+        antes = atual
+        atual = novo
+    return lista
 
 def altera_salarios(salarios):
     ''' Calcule o aumento de salário de acordo com a seguinte tabela:
@@ -30,6 +66,18 @@ def altera_salarios(salarios):
     Salário mínimo para referência: R$ 724,00
     Retorna a lista com os salários alterados
     '''
+    sal_minimo = 724
+    for s in range(len(salarios)):
+        if salarios[s] <= sal_minimo:
+            salarios[s] = (salarios[s] * 120) / 100
+        elif salarios[s] > sal_minimo and salarios[s] <= sal_minimo * 2:
+            salarios[s] = (salarios[s] / 100) * 115
+        elif salarios[s] > sal_minimo * 2 and salarios[s] <= sal_minimo * 5:
+            salarios[s] = (salarios[s] * 110) / 100
+        else:
+            salarios[s] = (salarios[s] * 105) / 100
+    return salarios
+
 
 # Área de testes: só mexa aqui se souber o que está fazendo!
 acertos = 0
@@ -39,12 +87,11 @@ def test(obtido, esperado):
     global acertos, total
     total += 1
     if obtido != esperado:
-        prefixo = ' Falhou.'
+        prefixo = '\033[31m%s' % ('Falhou')
     else:
-        prefixo = ' Passou.'
+        prefixo = '\033[32m%s' % ('Passou')
         acertos += 1
-    print ('%s Esperado: %s \tObtido: %s' % (prefixo,repr(esperado), 
-        repr(obtido)))
+    print('%s Esperado: %s \tObtido: %s\033[1;m' % (prefixo, repr(esperado), repr(obtido)))
 
 def main():
     print(' Meses acima da média:')
